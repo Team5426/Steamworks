@@ -1,7 +1,5 @@
 package org.usfirst.frc.team5426.robot;
 
-import java.awt.Color;
-
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
@@ -26,7 +24,6 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 
         CommandBase.init();
-        OI.init();
         
         vt = new Thread(() -> {
         	

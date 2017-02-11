@@ -1,12 +1,10 @@
 package org.usfirst.frc.team5426.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
-
-public class ShootGear extends CommandBase {
-
-	public ShootGear() {
+public class IntakeCommand extends CommandBase {
+	
+	public IntakeCommand() {
 		
-		requires(gearshooter);
+		requires(intake);
 	}
 	
 	protected void initialize() {
@@ -15,11 +13,7 @@ public class ShootGear extends CommandBase {
 	
 	protected void execute() {
 		
-		gearshooter.open();
-		
-		Timer.delay(0.5);
-		
-		gearshooter.close();
+		intake.intake();
 	}
 	
 	protected void interrupted() {
@@ -28,12 +22,12 @@ public class ShootGear extends CommandBase {
 	
 	protected void end() {
 		
-		if (gearshooter.isOpen()) gearshooter.close();
+		intake.stop();
 	}
 	
+	@Override
 	protected boolean isFinished() {
 		
 		return false;
 	}
-
 }

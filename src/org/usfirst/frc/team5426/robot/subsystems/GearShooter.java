@@ -1,6 +1,6 @@
 package org.usfirst.frc.team5426.robot.subsystems;
 
-import org.usfirst.frc.team5426.robot.commands.ShootGear;
+import org.usfirst.frc.team5426.robot.commands.ShootGearCommand;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -32,7 +32,7 @@ public class GearShooter extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 		
-		this.setDefaultCommand(new ShootGear());
+		this.setDefaultCommand(new ShootGearCommand());
 	}
 
 }
