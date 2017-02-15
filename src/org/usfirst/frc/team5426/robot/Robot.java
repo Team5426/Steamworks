@@ -15,6 +15,7 @@ public class Robot extends IterativeRobot {
     
     public void robotInit() {
 
+    	RobotMap.init();
         CommandBase.init();
     }
 

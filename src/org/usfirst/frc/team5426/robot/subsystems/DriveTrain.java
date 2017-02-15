@@ -22,9 +22,9 @@ public class DriveTrain extends Subsystem {
     public DriveTrain() {
 
     	FRONT_LEFT 	= new Talon(RobotMap.FRONT_LEFT_CHANNEL);
-    	REAR_LEFT 	= new Talon(RobotMap.BACK_LEFT_CHANNEL);
+    	REAR_LEFT 	= new Talon(RobotMap.REAR_LEFT_CHANNEL);
     	FRONT_RIGHT = new Talon(RobotMap.FRONT_RIGHT_CHANNEL);
-    	REAR_RIGHT 	= new Talon(RobotMap.BACK_RIGHT_CHANNEL);
+    	REAR_RIGHT 	= new Talon(RobotMap.REAR_RIGHT_CHANNEL);
 
         drive = new RobotDrive(FRONT_LEFT, REAR_LEFT, FRONT_RIGHT, REAR_RIGHT);
     }

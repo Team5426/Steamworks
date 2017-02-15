@@ -44,22 +44,6 @@ public abstract class CommandBase extends Command {
 
     public static void updateSmartDashboard() {
     	
-    	if (SmartDashboard.containsKey("FRONT_LEFT_CHANNEL")
-    	 && SmartDashboard.containsKey("FRONT_RIGHT_CHANNEL")
-    	 && SmartDashboard.containsKey("BACK_LEFT_CHANNEL")
-    	 && SmartDashboard.containsKey("BACK_RIGHT_CHANNEL")) {
-    		
-    		RobotMap.init();    		
-    	}
-    	
-    	else {
-    		
-    		RobotMap.FRONT_LEFT_CHANNEL  = 2;
-    		RobotMap.BACK_LEFT_CHANNEL 	 = 3;
-    		RobotMap.FRONT_RIGHT_CHANNEL = 4;
-    		RobotMap.BACK_RIGHT_CHANNEL  = 5;
-    	}
-    	
     	//SmartDashboard.putNumber("Distance", u.getValue() * 0.125);
     }
 }
