@@ -1,10 +1,10 @@
 package org.usfirst.frc.team5426.robot.commands;
 
-public class IntakeCommand extends CommandBase {
+public class LauncherShootCommand extends CommandBase {
 	
-	public IntakeCommand() {
+	public LauncherShootCommand() {
 		
-		requires(intake);
+		requires(launcher);
 	}
 	
 	protected void initialize() {
@@ -13,21 +13,19 @@ public class IntakeCommand extends CommandBase {
 	
 	protected void execute() {
 		
-		intake.intake(0.5);
-	}
-	
-	protected void interrupted() {
+		launcher.shoot(1.0);
 		
 	}
 	
 	protected void end() {
 		
-		intake.stop();
+		launcher.stop();
 	}
-	
+
 	@Override
 	protected boolean isFinished() {
 		
 		return false;
 	}
+
 }

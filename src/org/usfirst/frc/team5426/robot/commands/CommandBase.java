@@ -5,9 +5,8 @@ import org.usfirst.frc.team5426.robot.RobotMap;
 import org.usfirst.frc.team5426.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5426.robot.subsystems.GearShooter;
 import org.usfirst.frc.team5426.robot.subsystems.Intake;
+import org.usfirst.frc.team5426.robot.subsystems.Launcher;
 
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -19,6 +18,7 @@ public abstract class CommandBase extends Command {
     public static DriveTrain drive;
     public static GearShooter gearshooter;
     public static Intake intake;
+    public static Launcher launcher;
     public static OI oi;
 
     public CommandBase(String name) {
@@ -36,6 +36,7 @@ public abstract class CommandBase extends Command {
         drive = new DriveTrain();
         //gearshooter = new GearShooter();
         //intake = new Intake();
+        //launcher = new Launcher();
         oi = new OI();
     }
     

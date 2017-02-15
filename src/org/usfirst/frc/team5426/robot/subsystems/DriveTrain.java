@@ -3,8 +3,6 @@ package org.usfirst.frc.team5426.robot.subsystems;
 import org.usfirst.frc.team5426.robot.RobotMap;
 import org.usfirst.frc.team5426.robot.commands.DriveCommand;
 
-import com.ctre.CANTalon;
-
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -23,10 +21,10 @@ public class DriveTrain extends Subsystem {
 
     public DriveTrain() {
 
-    	FRONT_LEFT 	= new Talon(2);
-    	REAR_LEFT 	= new Talon(3);
-    	FRONT_RIGHT = new Talon(4);
-    	REAR_RIGHT 	= new Talon(5);
+    	FRONT_LEFT 	= new Talon(RobotMap.FRONT_LEFT_CHANNEL);
+    	REAR_LEFT 	= new Talon(RobotMap.BACK_LEFT_CHANNEL);
+    	FRONT_RIGHT = new Talon(RobotMap.FRONT_RIGHT_CHANNEL);
+    	REAR_RIGHT 	= new Talon(RobotMap.BACK_RIGHT_CHANNEL);
 
         drive = new RobotDrive(FRONT_LEFT, REAR_LEFT, FRONT_RIGHT, REAR_RIGHT);
     }
@@ -37,10 +35,11 @@ public class DriveTrain extends Subsystem {
         this.setDefaultCommand(new DriveCommand());
     }
 
-    public void drive(double leftYAxis, double leftXAxis, double twist, boolean omni) {
+    public void drive(double leftYAxis, double leftXAxis, double twist) {
     	
-    	//drive.arcadeDrive(cube(leftYAxis), cube(leftXAxis));
-    	drive.mecanumDrive_Polar(cube(leftYAxis), cube(leftXAxis), cube(twist));
+    	drive.arcadeDrive(cube(leftYAxis), cube(leftXAxis));
+    	//drive.mecanumDrive_Polar(cube(leftYAxis), cube(leftXAxis), twist);
+    	//drive.mecanumDrive_Polar(leftYAxis, leftXAxis, twist);
     }
     
     private double cube(double val) {

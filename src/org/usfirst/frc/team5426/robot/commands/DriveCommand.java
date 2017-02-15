@@ -18,7 +18,7 @@ public class DriveCommand extends CommandBase {
 
     protected void execute() {
     	
-        drive.drive(OI.controller.getLeftAxisY(), OI.controller.getLeftAxisX(), OI.controller.getRightAxisX(), true);
+        drive.drive(OI.controller.getLeftAxisY(), OI.controller.getLeftAxisX(), OI.controller.getRightAxisX());
         
         // for testing, remove when testing is complete
         OI.controller.setRumble(RumbleType.kLeftRumble, 10);

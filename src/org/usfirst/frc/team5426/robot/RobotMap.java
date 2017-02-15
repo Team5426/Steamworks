@@ -17,8 +17,8 @@ public class RobotMap {
 		BACK_LEFT_CHANNEL 	= (int) SmartDashboard.getNumber("BACK_LEFT_CHANNEL", 	3);
 		FRONT_RIGHT_CHANNEL = (int) SmartDashboard.getNumber("FRONT_RIGHT_CHANNEL", 4); 
 		BACK_RIGHT_CHANNEL 	= (int) SmartDashboard.getNumber("BACK_RIGHT_CHANNEL", 	5);
-		//INTAKE_CHANNEL		= (int) SmartDashboard.getNumber("INTAKE_CHANNEL", 6); // change this
-		//LAUNCHER_CHANNEL	= (int) SmartDashboard.getNumber("LAUNCHER_CHANNEL", 7); // change this too
+		INTAKE_CHANNEL		= (int) SmartDashboard.getNumber("INTAKE_CHANNEL", 0); // change this
+		LAUNCHER_CHANNEL	= (int) SmartDashboard.getNumber("LAUNCHER_CHANNEL", 1); // change this too
 		
 	}
 

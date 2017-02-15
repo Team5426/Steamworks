@@ -1,7 +1,5 @@
 package org.usfirst.frc.team5426.robot.subsystems;
 
-import org.usfirst.frc.team5426.robot.commands.ShootGearCommand;
-
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -14,17 +12,17 @@ public class GearShooter extends Subsystem {
 		solenoid = new Solenoid(0);
 	}
 	
-	public void open() {
+	public void shoot() {
 		
 		solenoid.set(true);
 	}
 	
-	public void close() {
+	public void stop() {
 		
 		solenoid.set(false);
 	}
 	
-	public boolean isOpen() {
+	public boolean isShooting() {
 		
 		return solenoid.get();
 	}
@@ -32,7 +30,7 @@ public class GearShooter extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 		
-		this.setDefaultCommand(new ShootGearCommand());
+		//this.setDefaultCommand(new ShootGearCommand());
 	}
 
 }

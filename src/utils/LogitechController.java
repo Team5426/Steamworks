@@ -7,19 +7,19 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class LogitechController extends Joystick {
 	
-	public Button button_A;
-	public Button button_B;
-	public Button button_X;
-	public Button button_Y;
+	public JoystickButton button_A;
+	public JoystickButton button_B;
+	public JoystickButton button_X;
+	public JoystickButton button_Y;
 	
-	public Button start;
-	public Button select;
+	public JoystickButton start;
+	public JoystickButton back;
 	
-	public Button bumper_left;
-	public Button bumper_right;
+	public JoystickButton bumper_left;
+	public JoystickButton bumper_right;
 	
-	public Button jbutton_left;
-	public Button jbutton_right;
+	public JoystickButton jbutton_left;
+	public JoystickButton jbutton_right;
 	
 	public Timer timer;
 	
@@ -33,7 +33,7 @@ public class LogitechController extends Joystick {
 		button_Y = new JoystickButton(this, 4);
 		
 		start = new JoystickButton(this, 8);
-		select = new JoystickButton(this, 7);
+		back = new JoystickButton(this, 7);
 		
 		bumper_left = new JoystickButton(this, 5);
 		bumper_right = new JoystickButton(this, 6);

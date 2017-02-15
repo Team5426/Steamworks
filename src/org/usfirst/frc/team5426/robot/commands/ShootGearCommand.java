@@ -17,11 +17,11 @@ public class ShootGearCommand extends CommandBase {
 	
 	protected void execute() {
 		
-		gearshooter.open();
+		gearshooter.shoot();
 		
 		Timer.delay(0.1);
 		
-		gearshooter.close();
+		gearshooter.stop();
 	}
 	
 	protected void interrupted() {
@@ -30,7 +30,7 @@ public class ShootGearCommand extends CommandBase {
 	
 	protected void end() {
 		
-		if (gearshooter.isOpen()) gearshooter.close();
+		if (gearshooter.isShooting()) gearshooter.stop();
 	}
 	
 	protected boolean isFinished() {

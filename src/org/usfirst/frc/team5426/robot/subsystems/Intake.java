@@ -6,13 +6,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Intake extends Subsystem {
 	
-	private double SHOOT_SPEED;
-	
 	private Talon motor;
 	
 	public Intake() {
 		
-		SHOOT_SPEED = 1.0;
 		motor = new Talon(RobotMap.INTAKE_CHANNEL);
 	}
 	
@@ -21,9 +18,9 @@ public class Intake extends Subsystem {
 		
 	}
 	
-	public void intake() {
+	public void intake(double speed) {
 		
-		motor.set(this.SHOOT_SPEED);
+		motor.set(speed);
 	}
 	
 	public void stop() {
