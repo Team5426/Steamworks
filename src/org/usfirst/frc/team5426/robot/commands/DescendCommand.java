@@ -1,8 +1,8 @@
 package org.usfirst.frc.team5426.robot.commands;
 
-public class ClimbCommand extends CommandBase {
+public class DescendCommand extends CommandBase {
 	
-	public ClimbCommand() {
+	public DescendCommand() {
 		
 		requires(climber);
 	}
@@ -13,7 +13,7 @@ public class ClimbCommand extends CommandBase {
 	
 	protected void execute() {
 		
-		climber.descend();
+		climber.climb();
 	}
 	
 	protected void interrupted() {

@@ -30,4 +30,5 @@ public class IntakeCommand extends CommandBase {
 		
 		intake.stop();
 	}
+	
 }

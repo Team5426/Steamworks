@@ -1,15 +1,19 @@
 package org.usfirst.frc.team5426.robot.subsystems;
 
+import java.util.Date;
+
 import org.usfirst.frc.team5426.robot.RobotMap;
+import org.usfirst.frc.team5426.robot.commands.CommandBase;
 
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Launcher extends Subsystem {
 	
+	public static Date blenderStart = null;
+	
 	private Victor motor_shooter;
 	private Victor motor_blender;
-	
 	
 	public Launcher() {
 		
@@ -48,6 +52,25 @@ public class Launcher extends Subsystem {
 	public Victor getBlenderMotor() {
 		
 		return motor_blender;
+	}
+	
+	public static void reset() {
+		
+		blenderStart = null;
+	}
+	
+	public static class RESET extends CommandBase {
+		
+		protected void execute() {
+			
+			Launcher.reset();
+		}
+		
+		@Override
+		protected boolean isFinished() {
+			// TODO Auto-generated method stub
+			return false;
+		}
 	}
 
 }
