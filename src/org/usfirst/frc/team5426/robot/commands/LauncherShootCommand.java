@@ -23,11 +23,14 @@ public class LauncherShootCommand extends CommandBase {
 		
 		if (!(blenderStart == null)) {
 			
-			if (System.currentTimeMillis() - blenderStart.getTime() >= 0) {
+			if ((System.currentTimeMillis() - blenderStart.getTime()) >= 0) {
 			
-				launcher.shoot(1.0);
-			
+				//launcher.getBlenderMotor().set(0.5);
 			}
+			
+			launcher.getBlenderMotor().set(0.5);
+			
+			launcher.shoot(1.0);
 		}
 		
 	}
@@ -40,6 +43,7 @@ public class LauncherShootCommand extends CommandBase {
 	protected void end() {
 		
 		launcher.stop();
+		launcher.getBlenderMotor().set(0.0);
 	}
 
 	@Override

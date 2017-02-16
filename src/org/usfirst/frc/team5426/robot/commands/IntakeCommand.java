@@ -13,21 +13,21 @@ public class IntakeCommand extends CommandBase {
 	
 	protected void execute() {
 		
-		intake.intake(0.5);
+		intake.intake();
 	}
 	
 	protected void interrupted() {
 		
 	}
 	
-	protected void end() {
-		
-		intake.stop();
-	}
-	
 	@Override
 	protected boolean isFinished() {
 		
 		return false;
+	}
+	
+	protected void end() {
+		
+		intake.stop();
 	}
 }

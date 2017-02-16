@@ -5,28 +5,33 @@ import org.usfirst.frc.team5426.robot.RobotMap;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class Intake extends Subsystem {
+public class Climber extends Subsystem {
 	
 	private Spark motor;
 	
-	public Intake() {
+	public Climber() {
 		
-		motor = new Spark(RobotMap.INTAKE_CHANNEL);
+		motor = new Spark(RobotMap.CLIMBER_CHANNEL);
 	}
-	
+
 	@Override
 	protected void initDefaultCommand() {
 		
+		
 	}
 	
-	public void intake() {
+	public void climb() {
 		
-		motor.set(0.65);
+		motor.set(1.0);
+	}
+	
+	public void descend() {
+		
+		motor.set(-1.0);
 	}
 	
 	public void stop() {
 		
 		motor.set(0.0);
 	}
-
 }

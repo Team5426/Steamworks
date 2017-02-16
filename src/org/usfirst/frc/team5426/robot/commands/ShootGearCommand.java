@@ -19,7 +19,7 @@ public class ShootGearCommand extends CommandBase {
 		
 		gearshooter.shoot();
 		
-		Timer.delay(0.1);
+		Timer.delay(0.3);
 		
 		gearshooter.stop();
 	}
