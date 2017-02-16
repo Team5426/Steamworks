@@ -68,7 +68,7 @@ public class Launcher extends Subsystem {
 		
 		@Override
 		protected boolean isFinished() {
-			// TODO Auto-generated method stub
+			
 			return false;
 		}
 	}

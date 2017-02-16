@@ -25,10 +25,8 @@ public class LauncherShootCommand extends CommandBase {
 			
 			if ((System.currentTimeMillis() - Launcher.blenderStart.getTime()) >= 0) {
 			
-				//launcher.getBlenderMotor().set(0.5);
+				launcher.getBlenderMotor().set(0.5);
 			}
-			
-			launcher.getBlenderMotor().set(0.5);
 			
 			launcher.shoot(1.0);
 		}
