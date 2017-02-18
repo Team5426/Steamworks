@@ -7,19 +7,19 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class LogitechController extends Joystick {
 	
-	public JoystickButton button_A;
-	public JoystickButton button_B;
-	public JoystickButton button_X;
-	public JoystickButton button_Y;
+	public Button button_A;
+	public Button button_B;
+	public Button button_X;
+	public Button button_Y;
 	
-	public JoystickButton start;
-	public JoystickButton back;
+	public Button start;
+	public Button back;
 	
-	public JoystickButton bumper_left;
-	public JoystickButton bumper_right;
+	public Button bumper_left;
+	public Button bumper_right;
 	
-	public JoystickButton jbutton_left;
-	public JoystickButton jbutton_right;
+	public Button jbutton_left;
+	public Button jbutton_right;
 	
 	public Timer timer;
 	
@@ -44,8 +44,8 @@ public class LogitechController extends Joystick {
 	
 	public void rumble(float l, float r) {
     	
-		this.setRumble(RumbleType.kLeftRumble, l);
-		this.setRumble(RumbleType.kRightRumble, r);
+		//this.setRumble(RumbleType.kLeftRumble, l);
+		//this.setRumble(RumbleType.kRightRumble, r);
 	}
 	
 	public double getLeftAxisX() {

@@ -1,10 +1,9 @@
 package org.usfirst.frc.team5426.robot;
 
 import org.usfirst.frc.team5426.robot.commands.ClimbCommand;
-import org.usfirst.frc.team5426.robot.commands.DescendCommand;
+import org.usfirst.frc.team5426.robot.commands.IntakeBallCommand;
 import org.usfirst.frc.team5426.robot.commands.LauncherShootCommand;
 import org.usfirst.frc.team5426.robot.commands.ShootGearCommand;
-import org.usfirst.frc.team5426.robot.subsystems.Launcher;
 
 import utils.LogitechController;
 import utils.LogitechJoystick;
@@ -16,12 +15,13 @@ public class OI {
 
     public OI() {
     	
-    	joystick.button_trigger.whileActive(new LauncherShootCommand());
+    	controller.button_A.whileActive(new IntakeBallCommand(1.0));
+    	joystick.button_trigger.whileActive(new LauncherShootCommand(1.0));
     	
-    	controller.button_X.whileActive(new ClimbCommand());
-    	controller.button_Y.whileActive(new DescendCommand());
-    	controller.bumper_left.whileActive(new ShootGearCommand());
+    	controller.button_X.whileActive(new ClimbCommand(1.0));
+    	//controller.button_Y.whileActive(new DescendCommand(1.0));
+    	controller.bumper_left.whileActive(new ShootGearCommand(1.0));
     	
-    	joystick.button_trigger.whenReleased(new Launcher.RESET());
+    	//joystick.button_trigger.whenInactive(new ResetCommand(1.0));
     }
 }

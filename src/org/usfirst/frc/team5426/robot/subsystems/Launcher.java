@@ -21,14 +21,20 @@ public class Launcher extends Subsystem {
 		motor_blender = new Victor(RobotMap.BLENDER_CHANNEL);
 	}
 	
-	public void shoot(double speed) {
+	public void shoot() {
 		
-		motor_shooter.set(speed);
+		motor_shooter.set(RobotMap.LAUNCHER_SPEED);
+	}
+	
+	public void startBlender() {
+		
+		motor_blender.set(RobotMap.BLENDER_SPEED);
 	}
 	
 	public void stop() {
 		
 		motor_shooter.set(0.0);
+		motor_blender.set(0.0);
 	}
 	
 	public boolean isShooting() {
@@ -59,18 +65,9 @@ public class Launcher extends Subsystem {
 		blenderStart = null;
 	}
 	
-	public static class RESET extends CommandBase {
+	public static void setTimer() {
 		
-		protected void execute() {
-			
-			Launcher.reset();
-		}
-		
-		@Override
-		protected boolean isFinished() {
-			
-			return false;
-		}
+		blenderStart = new Date(System.currentTimeMillis() + 1000);
 	}
 
 }

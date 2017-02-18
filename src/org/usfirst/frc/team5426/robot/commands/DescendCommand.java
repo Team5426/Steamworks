@@ -2,22 +2,25 @@ package org.usfirst.frc.team5426.robot.commands;
 
 public class DescendCommand extends CommandBase {
 	
-	public DescendCommand() {
+	public DescendCommand(double timeout) {
 		
 		requires(climber);
+		
+		this.setTimeout(timeout);
 	}
 	
 	protected void initialize() {
 		
+		climber.descend();
 	}
 	
 	protected void execute() {
 		
-		climber.climb();
 	}
 	
 	protected void interrupted() {
 		
+		climber.stop();
 	}
 	
 	protected void end() {
@@ -28,7 +31,7 @@ public class DescendCommand extends CommandBase {
 	@Override
 	protected boolean isFinished() {
 		
-		return false;
+		return this.isTimedOut();
 	}
 
 }

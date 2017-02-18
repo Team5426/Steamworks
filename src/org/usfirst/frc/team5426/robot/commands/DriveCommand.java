@@ -18,11 +18,7 @@ public class DriveCommand extends CommandBase {
 
     protected void execute() {
     	
-        drive.drive(OI.controller.getLeftAxisY(), OI.controller.getLeftAxisX(), OI.controller.getRightAxisX());
-        
-        // for testing, remove when testing is complete
-        OI.controller.setRumble(RumbleType.kLeftRumble, 10);
-        OI.controller.setRumble(RumbleType.kRightRumble, 10);
+        drive.drive(OI.controller.getLeftAxisY(), OI.controller.getLeftAxisX());
         
         // Sending the drive command as fast as possible is pointless and hogs CPU cycles.
         // The 0.003 second delay between drive commands avoids that while still not

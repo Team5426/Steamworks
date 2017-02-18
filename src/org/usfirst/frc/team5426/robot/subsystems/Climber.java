@@ -2,16 +2,17 @@ package org.usfirst.frc.team5426.robot.subsystems;
 
 import org.usfirst.frc.team5426.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Spark;
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Climber extends Subsystem {
 	
-	private Spark motor;
+	private CANTalon motor;
 	
 	public Climber() {
 		
-		motor = new Spark(RobotMap.CLIMBER_CHANNEL);
+		motor = new CANTalon(2);
 	}
 
 	@Override
@@ -22,12 +23,12 @@ public class Climber extends Subsystem {
 	
 	public void climb() {
 		
-		motor.set(1.0);
+		motor.set(RobotMap.CLIMB_SPEED);
 	}
 	
 	public void descend() {
 		
-		motor.set(-1.0);
+		motor.set(RobotMap.CLIMB_SPEED);
 	}
 	
 	public void stop() {

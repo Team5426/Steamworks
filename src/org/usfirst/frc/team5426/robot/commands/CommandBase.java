@@ -14,9 +14,9 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public abstract class CommandBase extends Command {
 
+	public static Intake intake;
     public static DriveTrain drive;
     public static GearShooter gearshooter;
-    public static Intake intake;
     public static Launcher launcher;
     public static Climber climber;
     public static OI oi;
@@ -33,9 +33,9 @@ public abstract class CommandBase extends Command {
 
     public static void init() {
 
+    	intake = new Intake();
         drive = new DriveTrain();
         gearshooter = new GearShooter();
-        //intake = new Intake();
         launcher = new Launcher();
         climber = new Climber();
         oi = new OI();

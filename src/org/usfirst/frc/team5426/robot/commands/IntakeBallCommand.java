@@ -1,34 +1,35 @@
 package org.usfirst.frc.team5426.robot.commands;
 
-public class IntakeCommand extends CommandBase {
+public class IntakeBallCommand extends CommandBase {
 	
-	public IntakeCommand() {
+	public IntakeBallCommand(double timeout) {
 		
 		requires(intake);
+		
+		this.setTimeout(timeout);
 	}
 	
 	protected void initialize() {
 		
+		intake.intake();
 	}
 	
 	protected void execute() {
 		
-		intake.intake();
 	}
 	
 	protected void interrupted() {
 		
-	}
-	
-	@Override
-	protected boolean isFinished() {
-		
-		return false;
-	}
-	
-	protected void end() {
-		
 		intake.stop();
 	}
 	
+	protected void end() {
+			
+		intake.stop();
+	}
+	
+	protected boolean isFinished() {
+		
+		return this.isTimedOut();
+	}
 }

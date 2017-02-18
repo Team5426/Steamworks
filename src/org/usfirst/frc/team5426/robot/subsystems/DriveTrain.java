@@ -12,58 +12,63 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class DriveTrain extends Subsystem {
 
-    private Talon FRONT_LEFT;
-    private Talon REAR_LEFT;
-    private Talon FRONT_RIGHT;
-    private Talon REAR_RIGHT;
+	private Talon FRONT_LEFT;
+	private Talon REAR_LEFT;
+	private Talon FRONT_RIGHT;
+	private Talon REAR_RIGHT;
 
-    private RobotDrive drive;
+	private RobotDrive drive;
 
-    public DriveTrain() {
+	public DriveTrain() {
 
-    	FRONT_LEFT 	= new Talon(RobotMap.FRONT_LEFT_CHANNEL);
-    	REAR_LEFT 	= new Talon(RobotMap.REAR_LEFT_CHANNEL);
-    	FRONT_RIGHT = new Talon(RobotMap.FRONT_RIGHT_CHANNEL);
-    	REAR_RIGHT 	= new Talon(RobotMap.REAR_RIGHT_CHANNEL);
+		FRONT_LEFT = new Talon(RobotMap.FRONT_LEFT_CHANNEL);
+		REAR_LEFT = new Talon(RobotMap.REAR_LEFT_CHANNEL);
+		FRONT_RIGHT = new Talon(RobotMap.FRONT_RIGHT_CHANNEL);
+		REAR_RIGHT = new Talon(RobotMap.REAR_RIGHT_CHANNEL);
 
-        drive = new RobotDrive(FRONT_LEFT, REAR_LEFT, FRONT_RIGHT, REAR_RIGHT);
-    }
+		drive = new RobotDrive(FRONT_LEFT, REAR_LEFT, FRONT_RIGHT, REAR_RIGHT);
+	}
 
-    @Override
-    protected void initDefaultCommand() {
+	@Override
+	protected void initDefaultCommand() {
 
-        this.setDefaultCommand(new DriveCommand());
-    }
+		this.setDefaultCommand(new DriveCommand());
+	}
 
-    public void drive(double leftYAxis, double leftXAxis, double twist) {
-    	
-    	drive.arcadeDrive(cube(leftYAxis), cube(leftXAxis));
-    	//drive.mecanumDrive_Polar(cube(leftYAxis), cube(leftXAxis), twist);
-    	//drive.mecanumDrive_Polar(leftYAxis, leftXAxis, twist);
-    }
-    
-    private double cube(double val) {
-    	
-    	return Math.pow(val, 3);
-    }
-    
-    public Talon getFrontLeft() {
-    	
-    	return FRONT_LEFT;
-    }
-    
-    public Talon getFrontRight() {
-    	
-    	return FRONT_RIGHT;
-    }
-    
-    public Talon getRearLeft() {
-    	
-    	return REAR_LEFT;
-    }
-    
-    public Talon getRearRight() {
-    	
-    	return REAR_RIGHT;
-    }
+	public void drive(double leftYAxis, double leftXAxis) {
+
+		drive.arcadeDrive(cube(leftYAxis), cube(leftXAxis));
+		// drive.mecanumDrive_Polar(cube(leftYAxis), cube(leftXAxis), twist);
+		// drive.mecanumDrive_Polar(leftYAxis, leftXAxis, twist);
+	}
+
+	private double cube(double val) {
+
+		return Math.pow(val, 3);
+	}
+
+	public Talon getFrontLeft() {
+
+		return FRONT_LEFT;
+	}
+
+	public Talon getFrontRight() {
+
+		return FRONT_RIGHT;
+	}
+
+	public Talon getRearLeft() {
+
+		return REAR_LEFT;
+	}
+
+	public Talon getRearRight() {
+
+		return REAR_RIGHT;
+	}
+	
+	public RobotDrive getDrive() {
+		
+		return drive;
+	}
 }
