@@ -18,12 +18,11 @@ public class DriveCommand extends CommandBase {
 
     protected void execute() {
     	
-        drive.drive(OI.controller.getLeftAxisY(), OI.controller.getLeftAxisX());
+        drive.drive(-OI.controller.getLeftAxisY(), -OI.controller.getLeftAxisX());
         
         // Sending the drive command as fast as possible is pointless and hogs CPU cycles.
         // The 0.003 second delay between drive commands avoids that while still not
         // affecting the speed of the robot
-        Timer.delay(0.003);
     }
 
     protected boolean isFinished() {
