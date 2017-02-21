@@ -21,7 +21,7 @@ public class AutonomousDrive extends CommandBase {
 	
 	protected void execute() {
 		
-		drive.drive(speed, angle);
+		drive.drive(speed, angle, true);
 		
 		this.setTimeout(seconds);
 	}

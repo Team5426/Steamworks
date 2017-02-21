@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5426.robot.subsystems;
 
+import org.usfirst.frc.team5426.robot.OI;
 import org.usfirst.frc.team5426.robot.RobotMap;
 import org.usfirst.frc.team5426.robot.commands.DriveCommand;
 
@@ -18,6 +19,8 @@ public class DriveTrain extends Subsystem {
 	private Talon REAR_RIGHT;
 
 	private RobotDrive drive;
+	
+	private double previousSensitivity;
 
 	public DriveTrain() {
 
@@ -27,6 +30,8 @@ public class DriveTrain extends Subsystem {
 		REAR_RIGHT = new Talon(RobotMap.REAR_RIGHT_CHANNEL);
 
 		drive = new RobotDrive(FRONT_LEFT, REAR_LEFT, FRONT_RIGHT, REAR_RIGHT);
+		
+		RobotMap.drive = this.drive;
 	}
 
 	@Override
@@ -35,9 +40,21 @@ public class DriveTrain extends Subsystem {
 		this.setDefaultCommand(new DriveCommand());
 	}
 
-	public void drive(double leftYAxis, double leftXAxis) {
-
-		drive.arcadeDrive(cube(leftYAxis), cube(leftXAxis));
+	public void drive(double leftYAxis, double leftXAxis, boolean sensitive) {
+		
+		drive.setSensitivity(RobotMap.DRIVE_SENSITIVITY);
+		
+		if (OI.controller.getLeftTrigger() > 0.1 && OI.controller.getRightTrigger() > 0.1) {
+			
+			drive.arcadeDrive((leftYAxis / 2), (leftXAxis / 2), true);
+		}
+		
+		else {
+		
+			drive.arcadeDrive(leftYAxis, leftXAxis, true);
+		
+		}
+		
 		// drive.mecanumDrive_Polar(cube(leftYAxis), cube(leftXAxis), twist);
 		// drive.mecanumDrive_Polar(leftYAxis, leftXAxis, twist);
 	}

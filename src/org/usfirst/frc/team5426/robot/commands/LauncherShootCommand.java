@@ -2,9 +2,9 @@ package org.usfirst.frc.team5426.robot.commands;
 
 import java.util.Date;
 
-import org.usfirst.frc.team5426.robot.subsystems.Launcher;
-
 public class LauncherShootCommand extends CommandBase {
+	
+	public static Date blender = null;
 	
 	public LauncherShootCommand(double timeout) {
 		
@@ -15,7 +15,13 @@ public class LauncherShootCommand extends CommandBase {
 	
 	protected void initialize() {
 		
-		launcher.startBlender();
+		if (blender == null) blender = new Date(System.currentTimeMillis() + 1000);
+		
+		if (System.currentTimeMillis() - blender.getTime() >= 0) {
+			
+			launcher.startBlender();
+		}
+		
 		launcher.shoot();
 	}
 	

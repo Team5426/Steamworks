@@ -21,6 +21,7 @@ public class IntakeBallCommand extends CommandBase {
 	protected void interrupted() {
 		
 		intake.stop();
+		this.cancel();
 	}
 	
 	protected void end() {

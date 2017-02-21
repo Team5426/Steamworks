@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.vision.VisionThread;
 import utils.GripPipeline;
 
@@ -26,14 +27,13 @@ public class Robot extends IterativeRobot {
 	private Command auto;
 	private SendableChooser<Object> mode;
 	
-	/*private static final int IMG_WIDTH = 320;
+	private static final int IMG_WIDTH = 320;
 	private static final int IMG_HEIGHT = 240;
 	
 	private VisionThread visionThread;
 	private double centerX = 0.0;
-	private RobotDrive drive;
 	
-	private final Object imgLock = new Object();*/
+	private final Object imgLock = new Object();
 	
 	@Override
     public void robotInit() {
@@ -44,9 +44,10 @@ public class Robot extends IterativeRobot {
         mode = new SendableChooser<>();
     	mode.addDefault("Bring Gear", new DropGear());
     	mode.addObject("Drive Straight",  new DriveStraight());
+    	SmartDashboard.putData("Auto Mode: " , mode);
     	
-    	/*UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-        camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
+    	/*UsbCamera camera = CameraServer.getInstance().startAutomaticCapture("cam0", "http://raspberrypi.local:8081");
+        camera.setResolution(300, 300);
         
         visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
         	
@@ -55,14 +56,14 @@ public class Robot extends IterativeRobot {
                 Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
                 
                 synchronized (imgLock) {
+                	
                     centerX = r.x + (r.width / 2);
                 }
             }
-        });*/
+        });
         
-        //visionThread.start();
-            
-        //drive = CommandBase.drive.getDrive();
+        visionThread.setDaemon(true);
+        visionThread.start();*/
     }
 
     @Override
@@ -74,7 +75,6 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
     	
     	auto = (Command) mode.getSelected();
-    	
     	if (!(mode == null)) auto.start();
     }
     
@@ -100,7 +100,8 @@ public class Robot extends IterativeRobot {
     	Scheduler.getInstance().run();
         CommandBase.updateSmartDashboard();
     }
-
+    
+    @Override
     public void autonomousPeriodic() {
     	
     	/*double centerX;
@@ -112,15 +113,18 @@ public class Robot extends IterativeRobot {
     	
     	double turn = centerX - (IMG_WIDTH / 2);
     	
-    	drive.arcadeDrive(-0.2, turn * 0.005);
+    	RobotMap.drive.arcadeDrive(-0.2, turn * 0.005);
     	
     	Scheduler.getInstance().run();
     	
     	System.out.println("Center X: " + centerX);*/
+    	
+    	Scheduler.getInstance().run();
     }
     
     @Override
     public void testPeriodic() {
+    	
         LiveWindow.run();
     }
 }

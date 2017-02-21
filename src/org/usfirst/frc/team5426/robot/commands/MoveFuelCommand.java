@@ -1,19 +1,17 @@
 package org.usfirst.frc.team5426.robot.commands;
 
-import org.usfirst.frc.team5426.robot.subsystems.Launcher;
-
-public class ResetCommand extends CommandBase {
+public class MoveFuelCommand extends CommandBase {
 	
-	public ResetCommand(double timeout) {
+	public MoveFuelCommand(double timeout) {
 		
-		requires(launcher);
+		requires(intake);
 		
 		this.setTimeout(timeout);
 	}
 	
 	protected void initialize() {
 		
-		LauncherShootCommand.blender = null;
+		intake.getMotor().set(0.3);
 	}
 	
 	protected void execute() {
@@ -22,15 +20,15 @@ public class ResetCommand extends CommandBase {
 	
 	protected void interrupted() {
 		
+		intake.stop();
 		this.cancel();
 	}
 	
 	protected void end() {
 		
-		this.cancel();
+		intake.stop();
 	}
 	
-	@Override
 	protected boolean isFinished() {
 		
 		return this.isTimedOut();
