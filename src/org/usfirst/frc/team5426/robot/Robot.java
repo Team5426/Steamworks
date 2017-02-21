@@ -6,11 +6,9 @@ import org.usfirst.frc.team5426.robot.auto.DriveStraight;
 import org.usfirst.frc.team5426.robot.auto.DropGear;
 import org.usfirst.frc.team5426.robot.commands.CommandBase;
 
-import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.AxisCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -46,12 +44,16 @@ public class Robot extends IterativeRobot {
     	mode.addObject("Drive Straight",  new DriveStraight());
     	SmartDashboard.putData("Auto Mode: " , mode);
     	
-    	/*UsbCamera camera = CameraServer.getInstance().startAutomaticCapture("cam0", "http://raspberrypi.local:8081");
+    	CameraServer server = CameraServer.getInstance();
+    	
+    	AxisCamera camera = server.addAxisCamera("http://raspberrypi.local:8081");
         camera.setResolution(300, 300);
         
         visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
         	
             if (!pipeline.filterContoursOutput().isEmpty()) {
+            	
+            	System.out.println("FOUND SOMETHING");
             	
                 Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
                 
@@ -63,7 +65,7 @@ public class Robot extends IterativeRobot {
         });
         
         visionThread.setDaemon(true);
-        visionThread.start();*/
+        visionThread.start();
     }
 
     @Override
@@ -104,7 +106,9 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousPeriodic() {
     	
-    	/*double centerX;
+    	System.out.println("autonomousPeriodic()");
+    	
+    	double centerX;
     	
     	synchronized (imgLock) {
     		
@@ -113,13 +117,11 @@ public class Robot extends IterativeRobot {
     	
     	double turn = centerX - (IMG_WIDTH / 2);
     	
+    	System.out.println("Turn: " + turn);
+    	
     	RobotMap.drive.arcadeDrive(-0.2, turn * 0.005);
     	
-    	Scheduler.getInstance().run();
-    	
-    	System.out.println("Center X: " + centerX);*/
-    	
-    	Scheduler.getInstance().run();
+    	System.out.println("Center X: " + centerX);
     }
     
     @Override
