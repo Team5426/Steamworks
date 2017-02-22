@@ -3,6 +3,7 @@ package org.usfirst.frc.team5426.robot.commands;
 import org.usfirst.frc.team5426.robot.OI;
 import org.usfirst.frc.team5426.robot.RobotMap;
 import org.usfirst.frc.team5426.robot.subsystems.Climber;
+import org.usfirst.frc.team5426.robot.subsystems.CompressorControl;
 import org.usfirst.frc.team5426.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5426.robot.subsystems.GearShooter;
 import org.usfirst.frc.team5426.robot.subsystems.Intake;
@@ -23,6 +24,7 @@ public abstract class CommandBase extends Command {
     public static GearShooter gearshooter;
     public static Launcher launcher;
     public static Climber climber;
+    public static CompressorControl compressor;
     public static OI oi;
     
     public static SendableChooser<Front> front;
@@ -44,6 +46,7 @@ public abstract class CommandBase extends Command {
         gearshooter = new GearShooter();
         launcher = new Launcher();
         climber = new Climber();
+        compressor = new CompressorControl();
         oi = new OI();
         
         front = new SendableChooser<>();

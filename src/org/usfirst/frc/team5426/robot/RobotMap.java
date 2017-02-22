@@ -15,7 +15,9 @@ public class RobotMap {
 	 						INTAKE_CHANNEL		= 4,
 	 						LAUNCHER_CHANNEL	= 5,
 	 						CLIMBER_CHANNEL		= 2,
-	 						BLENDER_CHANNEL		= 3;
+	 						BLENDER_CHANNEL		= 3,
+	 						
+	 						COMPRESSOR_CAN		= 0;
 	
 	public static double	LAUNCHER_SPEED,
 							INTAKE_SPEED,

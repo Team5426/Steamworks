@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5426.robot;
 
 import org.usfirst.frc.team5426.robot.commands.ClimbCommand;
+import org.usfirst.frc.team5426.robot.commands.CompressCommand;
 import org.usfirst.frc.team5426.robot.commands.IntakeBallCommand;
 import org.usfirst.frc.team5426.robot.commands.LauncherShootCommand;
 import org.usfirst.frc.team5426.robot.commands.MoveFuelCommand;
@@ -20,12 +21,10 @@ public class OI {
     	controller.button_A.whileActive(new IntakeBallCommand(1.0));
     	joystick.button_trigger.whileActive(new LauncherShootCommand(1.0));
     	joystick.button_side.whileActive(new MoveFuelCommand(1.0));
+    	joystick.button_trigger.whenReleased(new ResetCommand(1.0));
+    	joystick.button_compress.whileActive(new CompressCommand());
     	
     	controller.button_X.whileActive(new ClimbCommand(1.0));
-    	//controller.button_Y.whileActive(new DescendCommand(1.0));
-    	
     	controller.bumper_left.whileActive(new ShootGearCommand(1.0));
-    	
-    	joystick.button_trigger.whenReleased(new ResetCommand(1.0));
     }
 }

@@ -33,6 +33,8 @@ public class Robot extends IterativeRobot {
 	
 	private final Object imgLock = new Object();
 	
+	public static boolean canCompress = false;
+	
 	@Override
     public void robotInit() {
 
@@ -66,29 +68,32 @@ public class Robot extends IterativeRobot {
         
         visionThread.setDaemon(true);
         visionThread.start();
-    }
+	}
 
     @Override
     public void disabledInit() {
-
+    	
+    	canCompress = true;
     }
 
     @Override
     public void autonomousInit() {
+    	
+    	canCompress = false;
     	
     	auto = (Command) mode.getSelected();
     	if (!(mode == null)) auto.start();
     }
     
     @Override
-    public void robotPeriodic() {
+    public void teleopInit() {
     	
-    	Scheduler.getInstance().run();
+    	canCompress = false;
     }
     
     @Override
-    public void teleopInit() {
-    	CommandBase.updateSmartDashboard();
+    public void robotPeriodic() {
+    	
     }
 
     @Override
@@ -106,7 +111,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousPeriodic() {
     	
-    	System.out.println("autonomousPeriodic()");
+    	System.out.println("autonomousPeriodic() fired");
     	
     	double centerX;
     	

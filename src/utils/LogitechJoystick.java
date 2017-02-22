@@ -8,6 +8,7 @@ public class LogitechJoystick extends Joystick {
 	
 	public Button button_trigger;
 	public Button button_side;
+	public Button button_compress;
 	
 	public LogitechJoystick(int port) {
 		
@@ -15,6 +16,7 @@ public class LogitechJoystick extends Joystick {
 		
 		button_trigger = new JoystickButton(this, 1);
 		button_side = new JoystickButton(this, 2);
+		button_compress = new JoystickButton(this, 11);
 	}
 	
 	public double getXAxis() {
