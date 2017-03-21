@@ -28,8 +28,7 @@ import org.opencv.objdetect.*;
 public class GripPipeline implements VisionPipeline {
 
 	//Outputs
-	private Mat resizeImageOutput = new Mat();
-	private Mat hsvThresholdOutput = new Mat();
+	private Mat hslThresholdOutput = new Mat();
 	private ArrayList<MatOfPoint> findContoursOutput = new ArrayList<MatOfPoint>();
 	private ArrayList<MatOfPoint> filterContoursOutput = new ArrayList<MatOfPoint>();
 	private ArrayList<MatOfPoint> convexHullsOutput = new ArrayList<MatOfPoint>();
@@ -42,34 +41,27 @@ public class GripPipeline implements VisionPipeline {
 	 * This is the primary method that runs the entire pipeline and updates the outputs.
 	 */
 	@Override	public void process(Mat source0) {
-		// Step Resize_Image0:
-		Mat resizeImageInput = source0;
-		double resizeImageWidth = 300.0;
-		double resizeImageHeight = 300.0;
-		int resizeImageInterpolation = Imgproc.INTER_CUBIC;
-		resizeImage(resizeImageInput, resizeImageWidth, resizeImageHeight, resizeImageInterpolation, resizeImageOutput);
-
-		// Step HSV_Threshold0:
-		Mat hsvThresholdInput = resizeImageOutput;
-		double[] hsvThresholdHue = {27.517985611510795, 113.95904436860071};
-		double[] hsvThresholdSaturation = {55.03597122302158, 255.0};
-		double[] hsvThresholdValue = {41.54093993950878, 255.0};
-		hsvThreshold(hsvThresholdInput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, hsvThresholdOutput);
+		// Step HSL_Threshold0:
+		Mat hslThresholdInput = source0;
+		double[] hslThresholdHue = {77.6978417266187, 146.21160409556313};
+		double[] hslThresholdSaturation = {38.98381294964029, 255.0};
+		double[] hslThresholdLuminance = {75.67446043165468, 255.0};
+		hslThreshold(hslThresholdInput, hslThresholdHue, hslThresholdSaturation, hslThresholdLuminance, hslThresholdOutput);
 
 		// Step Find_Contours0:
-		Mat findContoursInput = hsvThresholdOutput;
+		Mat findContoursInput = hslThresholdOutput;
 		boolean findContoursExternalOnly = false;
 		findContours(findContoursInput, findContoursExternalOnly, findContoursOutput);
 
 		// Step Filter_Contours0:
 		ArrayList<MatOfPoint> filterContoursContours = findContoursOutput;
-		double filterContoursMinArea = 26.0;
-		double filterContoursMinPerimeter = 22.0;
-		double filterContoursMinWidth = 2.0;
-		double filterContoursMaxWidth = 100.0;
+		double filterContoursMinArea = 800.0;
+		double filterContoursMinPerimeter = 50.0;
+		double filterContoursMinWidth = 0.0;
+		double filterContoursMaxWidth = 1000;
 		double filterContoursMinHeight = 50.0;
-		double filterContoursMaxHeight = 300.0;
-		double[] filterContoursSolidity = {54.85611510791367, 100.0};
+		double filterContoursMaxHeight = 2000.0;
+		double[] filterContoursSolidity = {69.24460431654677, 100.0};
 		double filterContoursMaxVertices = 1000000;
 		double filterContoursMinVertices = 0;
 		double filterContoursMinRatio = 0;
@@ -83,19 +75,11 @@ public class GripPipeline implements VisionPipeline {
 	}
 
 	/**
-	 * This method is a generated getter for the output of a Resize_Image.
-	 * @return Mat output from Resize_Image.
+	 * This method is a generated getter for the output of a HSL_Threshold.
+	 * @return Mat output from HSL_Threshold.
 	 */
-	public Mat resizeImageOutput() {
-		return resizeImageOutput;
-	}
-
-	/**
-	 * This method is a generated getter for the output of a HSV_Threshold.
-	 * @return Mat output from HSV_Threshold.
-	 */
-	public Mat hsvThresholdOutput() {
-		return hsvThresholdOutput;
+	public Mat hslThresholdOutput() {
+		return hslThresholdOutput;
 	}
 
 	/**
@@ -124,32 +108,19 @@ public class GripPipeline implements VisionPipeline {
 
 
 	/**
-	 * Scales and image to an exact size.
-	 * @param input The image on which to perform the Resize.
-	 * @param width The width of the output in pixels.
-	 * @param height The height of the output in pixels.
-	 * @param interpolation The type of interpolation.
-	 * @param output The image in which to store the output.
-	 */
-	private void resizeImage(Mat input, double width, double height,
-		int interpolation, Mat output) {
-		Imgproc.resize(input, output, new Size(width, height), 0.0, 0.0, interpolation);
-	}
-
-	/**
-	 * Segment an image based on hue, saturation, and value ranges.
+	 * Segment an image based on hue, saturation, and luminance ranges.
 	 *
 	 * @param input The image on which to perform the HSL threshold.
 	 * @param hue The min and max hue
 	 * @param sat The min and max saturation
-	 * @param val The min and max value
+	 * @param lum The min and max luminance
 	 * @param output The image in which to store the output.
 	 */
-	private void hsvThreshold(Mat input, double[] hue, double[] sat, double[] val,
-	    Mat out) {
-		Imgproc.cvtColor(input, out, Imgproc.COLOR_BGR2HSV);
-		Core.inRange(out, new Scalar(hue[0], sat[0], val[0]),
-			new Scalar(hue[1], sat[1], val[1]), out);
+	private void hslThreshold(Mat input, double[] hue, double[] sat, double[] lum,
+		Mat out) {
+		Imgproc.cvtColor(input, out, Imgproc.COLOR_BGR2HLS);
+		Core.inRange(out, new Scalar(hue[0], lum[0], sat[0]),
+			new Scalar(hue[1], lum[1], sat[1]), out);
 	}
 
 	/**

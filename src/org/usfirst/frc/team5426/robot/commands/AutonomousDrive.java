@@ -17,18 +17,25 @@ public class AutonomousDrive extends CommandBase {
 	
 	protected void initialize() {
 		
-	}
-	
-	protected void execute() {
-		
 		drive.drive(speed, angle, true);
 		
 		this.setTimeout(seconds);
 	}
 	
+	protected void execute() {
+		
+	}
+	
 	protected boolean isFinished() {
 		
-		return this.isTimedOut();
+		if (this.isTimedOut()) {
+			
+			this.cancel();
+			
+			return true;
+		}
+		
+		return false;
 	}
 
 }

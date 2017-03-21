@@ -20,15 +20,15 @@ public class DriveCommand extends CommandBase {
     @Override
     protected void execute() {
     	
-    	if (RobotMap.FRONT.equals(Front.INTAKE)) {
+    	/*if (RobotMap.FRONT.equals(Front.INTAKE)) {
     		
     		drive.drive(-OI.controller.getLeftAxisY(), -OI.controller.getLeftAxisX(), true);
     	}
     	
-    	else {
+    	else {*/
     		
-    		drive.drive(OI.controller.getLeftAxisY(), OI.controller.getLeftAxisX(), true);
-    	}
+    		drive.drive(-OI.controller.getLeftAxisY(), -OI.controller.getLeftAxisX(), true);
+    	//}
         
         // Sending the drive command as fast as possible is pointless and hogs CPU cycles.
         // The 0.003 second delay between drive commands avoids that while still not

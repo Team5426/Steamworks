@@ -26,7 +26,7 @@ public class LauncherShootCommand extends CommandBase {
 	}
 	
 	protected void execute() {
-				
+		
 	}
 	
 	protected void end() {
@@ -37,7 +37,14 @@ public class LauncherShootCommand extends CommandBase {
 	@Override
 	protected boolean isFinished() {
 		
-		return this.isTimedOut();
+		if (this.isTimedOut()) {
+			
+			this.cancel();
+			
+			return true;
+		}
+		
+		return false;
 	}
 
 }

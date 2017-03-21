@@ -11,27 +11,17 @@ public class CompressorControl extends Subsystem {
 	
 	public CompressorControl() {
 		
-		compressor = new Compressor(RobotMap.COMPRESSOR_CAN);
+		compressor = new Compressor(RobotMap.PNEUMATICS_CAN);
 	}
 	
 	public void compress() {
 		
-		while (compressor.getPressureSwitchValue()) {
-			
-			if (!compressor.enabled()) {
-				
-				System.out.println("Compressor enabled");
-				compressor.start();
-			}
-			
-			if (!compressor.getPressureSwitchValue()) {
-				
-				System.out.println("Compressor disabled");
-				compressor.stop();
-				
-				continue;
-			}
-		}
+		compressor.start();
+	}
+	
+	public void stop() {
+		
+		compressor.stop();
 	}
 	
 	@Override

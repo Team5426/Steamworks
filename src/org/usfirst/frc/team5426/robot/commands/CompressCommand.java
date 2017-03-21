@@ -1,33 +1,17 @@
 package org.usfirst.frc.team5426.robot.commands;
 
-import org.usfirst.frc.team5426.robot.Robot;
-
 public class CompressCommand extends CommandBase {
 	
-	public CompressCommand() {
+	public CompressCommand(double timeout) {
 		
 		requires(compressor);
+		
+		this.setTimeout(timeout);
 	}
 	
 	protected void initialize() {
 		
-		if (Robot.canCompress) {
-			
-			System.out.println("Can compress");
-			
-			try {
-				
-				compressor.compress();
-				
-			} catch (Exception e) {
-				
-			}
-		}
-		
-		else {
-			
-			System.out.println("Can't compress");
-		}
+		compressor.compress();
 	}
 	
 	protected void execute() {
@@ -36,15 +20,24 @@ public class CompressCommand extends CommandBase {
 	
 	protected void interrupted() {
 		
+		compressor.stop();
 	}
 	
 	protected void end() {
 		
+		compressor.stop();
 	}
 	
 	protected boolean isFinished() {
 		
-		return true;
+		if (this.isTimedOut()) {
+			
+			this.cancel();
+			
+			return true;
+		}
+		
+		return false;
 	}
 
 }

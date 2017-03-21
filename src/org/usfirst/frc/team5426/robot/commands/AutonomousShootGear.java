@@ -33,6 +33,13 @@ public class AutonomousShootGear extends CommandBase {
 	@Override
 	protected boolean isFinished() {
 		
+		if (this.isTimedOut()) {
+			
+			this.cancel();
+			
+			return true;
+		}
+		
 		return false;
 	}
 

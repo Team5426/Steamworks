@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5426.robot.subsystems;
 
+import org.usfirst.frc.team5426.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -9,7 +11,7 @@ public class GearShooter extends Subsystem {
 	
 	public GearShooter() {
 		
-		solenoid = new Solenoid(0);
+		solenoid = new Solenoid(RobotMap.PNEUMATICS_CAN);
 	}
 	
 	public void shoot() {

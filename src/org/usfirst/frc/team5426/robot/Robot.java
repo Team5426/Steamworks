@@ -37,21 +37,27 @@ public class Robot extends IterativeRobot {
 	
 	@Override
     public void robotInit() {
+		
+		/*mode = new SendableChooser<>();
+		mode.addDefault("Bring Gear", new DropGear());
+    	mode.addObject("Drive Straight",  new DriveStraight());
+    	SmartDashboard.putData("Auto Mode: " , mode);*/
 
     	RobotMap.init();
-        CommandBase.init();
-        
-        mode = new SendableChooser<>();
-    	mode.addDefault("Bring Gear", new DropGear());
+    	
+    	/*mode = new SendableChooser<>();
+		mode.addDefault("Bring Gear", new DropGear());
     	mode.addObject("Drive Straight",  new DriveStraight());
-    	SmartDashboard.putData("Auto Mode: " , mode);
+    	SmartDashboard.putData("Auto Mode: " , mode);*/
     	
-    	CameraServer server = CameraServer.getInstance();
+        CommandBase.init();
     	
-    	AxisCamera camera = server.addAxisCamera("http://raspberrypi.local:8081");
-        camera.setResolution(300, 300);
+    	//CameraServer server = CameraServer.getInstance();
+    	
+    	//AxisCamera camera = server.addAxisCamera("raspberrypi.local:8081");
+        //camera.setResolution(300, 300);
         
-        visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
+        /*visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
         	
             if (!pipeline.filterContoursOutput().isEmpty()) {
             	
@@ -67,7 +73,7 @@ public class Robot extends IterativeRobot {
         });
         
         visionThread.setDaemon(true);
-        visionThread.start();
+        visionThread.start();*/
 	}
 
     @Override
@@ -81,8 +87,8 @@ public class Robot extends IterativeRobot {
     	
     	canCompress = false;
     	
-    	auto = (Command) mode.getSelected();
-    	if (!(mode == null)) auto.start();
+    	/*auto = (Command) mode.getSelected();
+    	auto.start();*/
     }
     
     @Override
@@ -111,7 +117,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousPeriodic() {
     	
-    	System.out.println("autonomousPeriodic() fired");
+    	/*System.out.println("autonomousPeriodic() fired");
     	
     	double centerX;
     	
@@ -124,9 +130,9 @@ public class Robot extends IterativeRobot {
     	
     	System.out.println("Turn: " + turn);
     	
-    	RobotMap.drive.arcadeDrive(-0.2, turn * 0.005);
+    	RobotMap.drive.arcadeDrive(0.2, turn * 0.005);
     	
-    	System.out.println("Center X: " + centerX);
+    	System.out.println("Center X: " + centerX);*/
     }
     
     @Override

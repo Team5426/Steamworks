@@ -21,10 +21,10 @@ public abstract class CommandBase extends Command {
 
 	public static Intake intake;
     public static DriveTrain drive;
+    public static CompressorControl compressor;
     public static GearShooter gearshooter;
     public static Launcher launcher;
     public static Climber climber;
-    public static CompressorControl compressor;
     public static OI oi;
     
     public static SendableChooser<Front> front;
@@ -40,6 +40,10 @@ public abstract class CommandBase extends Command {
     }
 
     public static void init() {
+    	
+    	front = new SendableChooser<>();
+    	front.addDefault("Intake", Front.INTAKE);
+    	front.addObject("Gear Shooter", Front.SHOOTER);
 
     	intake = new Intake();
         drive = new DriveTrain();
@@ -48,10 +52,6 @@ public abstract class CommandBase extends Command {
         climber = new Climber();
         compressor = new CompressorControl();
         oi = new OI();
-        
-        front = new SendableChooser<>();
-    	front.addDefault("Intake", Front.INTAKE);
-    	front.addObject("Gear Shooter", Front.SHOOTER);
     }
     
     //private static AnalogInput u = new AnalogInput(0);

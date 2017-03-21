@@ -38,7 +38,14 @@ public class ShootGearCommand extends CommandBase {
 	
 	protected boolean isFinished() {
 		
-		return this.isTimedOut();
+		if (this.isTimedOut()) {
+			
+			this.cancel();
+			
+			return true;
+		}
+		
+		return false;
 	}
 
 }

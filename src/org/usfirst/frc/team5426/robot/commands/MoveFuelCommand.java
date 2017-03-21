@@ -31,7 +31,14 @@ public class MoveFuelCommand extends CommandBase {
 	
 	protected boolean isFinished() {
 		
-		return this.isTimedOut();
+		if (this.isTimedOut()) {
+			
+			this.cancel();
+			
+			return true;
+		}
+		
+		return false;
 	}
 
 }

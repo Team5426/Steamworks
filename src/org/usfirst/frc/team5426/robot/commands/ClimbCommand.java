@@ -31,7 +31,14 @@ public class ClimbCommand extends CommandBase {
 	@Override
 	protected boolean isFinished() {
 		
-		return this.isTimedOut();
+		if (this.isTimedOut()) {
+			
+			this.cancel();
+			
+			return true;
+		}
+		
+		return false;
 	}
 
 }

@@ -17,7 +17,7 @@ public class RobotMap {
 	 						CLIMBER_CHANNEL		= 2,
 	 						BLENDER_CHANNEL		= 3,
 	 						
-	 						COMPRESSOR_CAN		= 0;
+	 						PNEUMATICS_CAN		= 0;
 	
 	public static double	LAUNCHER_SPEED,
 							INTAKE_SPEED,
@@ -41,7 +41,8 @@ public class RobotMap {
 		DRIVE_SENSITIVITY	= (double) SmartDashboard.getNumber("Drive Sensitivity", 0.5);
 		INTAKE_SLOW_SPEED	= (double) SmartDashboard.getNumber("Fuel Moving Speed", 0.3);
 		
-		FRONT				= CommandBase.front.getSelected();
+		FRONT				= //CommandBase.front.getSelected();
+				Front.INTAKE;
 	}
 
 }
