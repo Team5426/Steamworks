@@ -26,6 +26,6 @@ public class OI {
     	controller.button_X.whileActive(new ClimbCommand(1.0));
     	controller.bumper_left.whileActive(new ShootGearCommand(1.0));
     	
-    	joystick.button_compress.whileActive(new CompressCommand(30.0));
+    	//joystick.button_compress.whenPressed(new CompressCommand(30.0));
     }
 }

@@ -33,7 +33,7 @@ public class RobotMap {
 	
 	public static void init() {
 		
-		LAUNCHER_SPEED 		= (double) SmartDashboard.getNumber("Launcher Speed", 1.0);
+		LAUNCHER_SPEED 		= (double) SmartDashboard.getNumber("Launcher Speed", 0.75);
 		INTAKE_SPEED		= (double) SmartDashboard.getNumber("Intake Speed", 1.0);
 		BLENDER_SPEED		= (double) SmartDashboard.getNumber("Blender Speed", 0.5);
 		GEAR_SHOOT_SECONDS	= (double) SmartDashboard.getNumber("Gear Shoot Seconds", 0.3);

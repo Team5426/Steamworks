@@ -22,7 +22,6 @@ public class AutonomousShootGear extends CommandBase {
 	
 	protected void execute() {
 		
-		gearshooter.stop();
 	}
 	
 	protected void end() {
@@ -33,14 +32,7 @@ public class AutonomousShootGear extends CommandBase {
 	@Override
 	protected boolean isFinished() {
 		
-		if (this.isTimedOut()) {
-			
-			this.cancel();
-			
-			return true;
-		}
-		
-		return false;
+		return this.isTimedOut();
 	}
 
 }

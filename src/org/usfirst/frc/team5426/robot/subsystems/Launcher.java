@@ -23,7 +23,6 @@ public class Launcher extends Subsystem {
 	
 	public void shoot() {
 		
-		motor_shooter.set(RobotMap.LAUNCHER_SPEED);
 	}
 	
 	public void startBlender() {

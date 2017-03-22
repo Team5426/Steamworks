@@ -10,6 +10,7 @@ import edu.wpi.cscore.AxisCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -22,8 +23,8 @@ import utils.GripPipeline;
  */
 public class Robot extends IterativeRobot {
     
-	private Command auto;
-	private SendableChooser<Object> mode;
+	Command autonomousCommand;
+	SendableChooser<CommandGroup> autoMode;
 	
 	private static final int IMG_WIDTH = 320;
 	private static final int IMG_HEIGHT = 240;
@@ -38,30 +39,24 @@ public class Robot extends IterativeRobot {
 	@Override
     public void robotInit() {
 		
-		/*mode = new SendableChooser<>();
-		mode.addDefault("Bring Gear", new DropGear());
-    	mode.addObject("Drive Straight",  new DriveStraight());
-    	SmartDashboard.putData("Auto Mode: " , mode);*/
-
-    	RobotMap.init();
-    	
-    	/*mode = new SendableChooser<>();
-		mode.addDefault("Bring Gear", new DropGear());
-    	mode.addObject("Drive Straight",  new DriveStraight());
-    	SmartDashboard.putData("Auto Mode: " , mode);*/
-    	
+		RobotMap.init();
         CommandBase.init();
+		
+        autoMode = new SendableChooser<CommandGroup>();
+    	autoMode.addDefault("Autonomous Straight Gear", new DropGear());
+    	autoMode.addObject("Autonomous Straight", new DriveStraight());
+    	SmartDashboard.putData("Autonomous Mode: ", autoMode);
     	
-    	//CameraServer server = CameraServer.getInstance();
+    	CameraServer server = CameraServer.getInstance();
     	
-    	//AxisCamera camera = server.addAxisCamera("raspberrypi.local:8081");
-        //camera.setResolution(300, 300);
+    	AxisCamera camera = server.addAxisCamera("raspberrypi.local:8081");
+        camera.setResolution(300, 300);
         
-        /*visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
+        visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
         	
             if (!pipeline.filterContoursOutput().isEmpty()) {
             	
-            	System.out.println("FOUND SOMETHING");
+            	//System.out.println("FOUND SOMETHING");
             	
                 Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
                 
@@ -73,7 +68,7 @@ public class Robot extends IterativeRobot {
         });
         
         visionThread.setDaemon(true);
-        visionThread.start();*/
+        visionThread.start();
 	}
 
     @Override
@@ -85,10 +80,12 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousInit() {
     	
-    	canCompress = false;
+    	System.out.println("Autonomous Init Fired");
     	
-    	/*auto = (Command) mode.getSelected();
-    	auto.start();*/
+    	autonomousCommand = autoMode.getSelected();
+    	if (autonomousCommand != null) autonomousCommand.start();
+    	
+    	//new DriveStraight().start();
     }
     
     @Override
@@ -117,6 +114,8 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousPeriodic() {
     	
+    	Scheduler.getInstance().run();
+    	
     	/*System.out.println("autonomousPeriodic() fired");
     	
     	double centerX;
@@ -126,7 +125,7 @@ public class Robot extends IterativeRobot {
     		centerX = this.centerX;
     	}
     	
-    	double turn = centerX - (IMG_WIDTH / 2);
+    	double turn = (IMG_WIDTH / 2) - centerX;
     	
     	System.out.println("Turn: " + turn);
     	

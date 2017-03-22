@@ -2,40 +2,40 @@ package org.usfirst.frc.team5426.robot.commands;
 
 public class AutonomousDrive extends CommandBase {
 	
-	private double speed;
-	private double angle;
-	private double seconds;
+private double moveValue, rotateValue, time;
 	
-	public AutonomousDrive(double speed, double angle, double seconds) {
+	public AutonomousDrive(double mv, double rv, double s) {
 		
 		requires(drive);
 		
-		this.speed = speed;
-		this.angle = angle;
-		this.seconds = seconds;
+		moveValue = mv;
+		rotateValue = rv;
+		time = s;
 	}
 	
-	protected void initialize() {
-		
-		drive.drive(speed, angle, true);
-		
-		this.setTimeout(seconds);
+	@Override
+	protected void end() {
 	}
-	
+
+	@Override
 	protected void execute() {
 		
+		drive.drive(this.moveValue, this.rotateValue, true);
+		
+		setTimeout(time);
 	}
-	
+
+	@Override
+	protected void initialize() {
+	}
+
+	@Override
+	protected void interrupted() {
+	}
+
+	@Override
 	protected boolean isFinished() {
-		
-		if (this.isTimedOut()) {
-			
-			this.cancel();
-			
-			return true;
-		}
-		
-		return false;
+		return isTimedOut();
 	}
 
 }
