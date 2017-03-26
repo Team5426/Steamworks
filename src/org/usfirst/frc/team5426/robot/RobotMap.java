@@ -27,19 +27,23 @@ public class RobotMap {
 							DRIVE_SENSITIVITY,
 							INTAKE_SLOW_SPEED;
 	
+	public static boolean COMPRESS;
+	
 	public static Front		FRONT;
 	
 	public static RobotDrive drive;
 	
 	public static void init() {
 		
-		LAUNCHER_SPEED 		= (double) SmartDashboard.getNumber("Launcher Speed", 0.75);
-		INTAKE_SPEED		= (double) SmartDashboard.getNumber("Intake Speed", 1.0);
-		BLENDER_SPEED		= (double) SmartDashboard.getNumber("Blender Speed", 0.5);
-		GEAR_SHOOT_SECONDS	= (double) SmartDashboard.getNumber("Gear Shoot Seconds", 0.3);
-		CLIMB_SPEED			= (double) SmartDashboard.getNumber("Climb Speed", 1.0);
-		DRIVE_SENSITIVITY	= (double) SmartDashboard.getNumber("Drive Sensitivity", 0.5);
-		INTAKE_SLOW_SPEED	= (double) SmartDashboard.getNumber("Fuel Moving Speed", 0.3);
+		LAUNCHER_SPEED 		= Robot.settings.getDouble("Launcher Speed", 0.75);
+		INTAKE_SPEED		= Robot.settings.getDouble("Intake Speed", 1.0);
+		BLENDER_SPEED		= Robot.settings.getDouble("Blender Speed", 0.5);
+		GEAR_SHOOT_SECONDS	= Robot.settings.getDouble("Gear Shoot Seconds", 0.3);
+		CLIMB_SPEED			= Robot.settings.getDouble("Climb Speed", 1.0);
+		DRIVE_SENSITIVITY	= Robot.settings.getDouble("Drive Sensitivity", 0.5);
+		INTAKE_SLOW_SPEED	= Robot.settings.getDouble("Fuel Moving Speed", 0.3);
+		
+		COMPRESS = Robot.settings.getBoolean("Compress", false);
 		
 		FRONT				= //CommandBase.front.getSelected();
 				Front.INTAKE;

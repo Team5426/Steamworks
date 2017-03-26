@@ -11,7 +11,7 @@ public class CompressorControl extends Subsystem {
 	
 	public CompressorControl() {
 		
-		compressor = new Compressor(RobotMap.PNEUMATICS_CAN);
+		compressor = new Compressor(0);
 	}
 	
 	public void compress() {

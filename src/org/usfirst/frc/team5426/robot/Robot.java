@@ -1,14 +1,14 @@
 package org.usfirst.frc.team5426.robot;
 
-import org.opencv.core.Rect;
-import org.opencv.imgproc.Imgproc;
+import org.usfirst.frc.team5426.robot.auto.DriveBoilerGear;
 import org.usfirst.frc.team5426.robot.auto.DriveStraight;
 import org.usfirst.frc.team5426.robot.auto.DropGear;
 import org.usfirst.frc.team5426.robot.commands.CommandBase;
 
-import edu.wpi.cscore.AxisCamera;
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.vision.VisionThread;
-import utils.GripPipeline;
 
 /**
  * Created by Duncan on 1/24/2017.
@@ -25,6 +24,8 @@ public class Robot extends IterativeRobot {
     
 	Command autonomousCommand;
 	SendableChooser<CommandGroup> autoMode;
+	
+	public static Preferences settings;
 	
 	private static final int IMG_WIDTH = 320;
 	private static final int IMG_HEIGHT = 240;
@@ -37,7 +38,9 @@ public class Robot extends IterativeRobot {
 	public static boolean canCompress = false;
 	
 	@Override
-    public void robotInit() {
+    public void robotInit() {		
+		
+		settings = Preferences.getInstance();
 		
 		RobotMap.init();
         CommandBase.init();
@@ -45,18 +48,21 @@ public class Robot extends IterativeRobot {
         autoMode = new SendableChooser<CommandGroup>();
     	autoMode.addDefault("Autonomous Straight Gear", new DropGear());
     	autoMode.addObject("Autonomous Straight", new DriveStraight());
+    	autoMode.addObject("Autonomous Boiler Gear", new DriveBoilerGear());
     	SmartDashboard.putData("Autonomous Mode: ", autoMode);
     	
     	CameraServer server = CameraServer.getInstance();
     	
-    	AxisCamera camera = server.addAxisCamera("raspberrypi.local:8081");
+    	// 10.0.100.5
+    	// frc-field.local
+    	// 10.54.26.11 or 10.54.26.12
+    	
+    	/*AxisCamera camera = server.addAxisCamera("10.54.26.11:8081");
         camera.setResolution(300, 300);
         
         visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
         	
             if (!pipeline.filterContoursOutput().isEmpty()) {
-            	
-            	//System.out.println("FOUND SOMETHING");
             	
                 Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
                 
@@ -68,7 +74,12 @@ public class Robot extends IterativeRobot {
         });
         
         visionThread.setDaemon(true);
-        visionThread.start();
+        visionThread.start();*/
+    	
+    	UsbCamera cam = new UsbCamera("cam0", 0);
+    	cam.setResolution(300, 300);
+    	
+    	server.startAutomaticCapture(cam);
 	}
 
     @Override
@@ -84,8 +95,6 @@ public class Robot extends IterativeRobot {
     	
     	autonomousCommand = autoMode.getSelected();
     	if (autonomousCommand != null) autonomousCommand.start();
-    	
-    	//new DriveStraight().start();
     }
     
     @Override
@@ -102,6 +111,15 @@ public class Robot extends IterativeRobot {
     @Override
     public void disabledPeriodic() {
     	
+    	/*if (OI.controller.button_Y.get()) {
+    		
+    		CommandBase.compressor.compress();
+    	}
+    	
+    	else {
+    		
+    		CommandBase.compressor.stop();
+    	}*/
     }
 
     @Override
@@ -138,5 +156,17 @@ public class Robot extends IterativeRobot {
     public void testPeriodic() {
     	
         LiveWindow.run();
+        
+        if (settings.getBoolean("Compress", true)) {
+        	
+        	try {
+        		
+        		CommandBase.compressor.compress();
+        		
+        	} catch (Exception e) {
+        		
+        		CommandBase.compressor.stop();
+        	}
+        }
     }
 }

@@ -40,8 +40,6 @@ public class ShootGearCommand extends CommandBase {
 		
 		if (this.isTimedOut()) {
 			
-			this.cancel();
-			
 			return true;
 		}
 		

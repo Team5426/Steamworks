@@ -22,6 +22,8 @@ private double moveValue, rotateValue, time;
 		
 		drive.drive(this.moveValue, this.rotateValue, true);
 		
+		launcher.getBlenderMotor().set(0.0);
+		
 		setTimeout(time);
 	}
 

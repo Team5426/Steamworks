@@ -13,6 +13,8 @@ public class AutonomousShootGear extends CommandBase {
 	
 	protected void initialize() {
 		
+		launcher.getBlenderMotor().set(0.0);
+		
 		gearshooter.shoot();
 		
 		Timer.delay(RobotMap.GEAR_SHOOT_SECONDS);

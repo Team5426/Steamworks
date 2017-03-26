@@ -20,7 +20,7 @@ public class CompressCommand extends CommandBase {
 	
 	protected void interrupted() {
 		
-		compressor.stop();
+		//compressor.stop();
 	}
 	
 	protected void end() {

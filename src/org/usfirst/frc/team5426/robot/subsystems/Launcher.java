@@ -17,12 +17,13 @@ public class Launcher extends Subsystem {
 	
 	public Launcher() {
 		
-		motor_shooter = new Victor(RobotMap.LAUNCHER_CHANNEL);
+		motor_shooter = new Victor(5);
 		motor_blender = new Victor(RobotMap.BLENDER_CHANNEL);
 	}
 	
 	public void shoot() {
 		
+		motor_shooter.set(RobotMap.LAUNCHER_SPEED);
 	}
 	
 	public void startBlender() {
