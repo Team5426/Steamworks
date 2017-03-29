@@ -4,6 +4,8 @@ import org.usfirst.frc.team5426.robot.auto.DriveBoilerGear;
 import org.usfirst.frc.team5426.robot.auto.DriveStraight;
 import org.usfirst.frc.team5426.robot.auto.DropGear;
 import org.usfirst.frc.team5426.robot.commands.CommandBase;
+import org.usfirst.frc.team5426.robot.commands.ToggleDoorsCommand;
+import org.usfirst.frc.team5426.robot.subsystems.GearShooter;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -76,10 +78,10 @@ public class Robot extends IterativeRobot {
         visionThread.setDaemon(true);
         visionThread.start();*/
     	
-    	UsbCamera cam = new UsbCamera("cam0", 0);
-    	cam.setResolution(300, 300);
+    	//UsbCamera cam = new UsbCamera("cam0", 0);
+    	//cam.setResolution(300, 300);
     	
-    	server.startAutomaticCapture(cam);
+    	//server.startAutomaticCapture(cam);
 	}
 
     @Override
@@ -106,6 +108,9 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotPeriodic() {
     	
+    	//SmartDashboard.putData("Door Status", GearShooter.doors_solenoid);
+    	SmartDashboard.putData("Drive", CommandBase.drive);
+    	SmartDashboard.putData("Door Toggle", new ToggleDoorsCommand(1.0));
     }
 
     @Override

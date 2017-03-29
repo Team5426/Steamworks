@@ -20,9 +20,9 @@ private double moveValue, rotateValue, time;
 	@Override
 	protected void execute() {
 		
-		drive.drive(this.moveValue, this.rotateValue, true);
+		drive.drive(this.moveValue, this.rotateValue);
 		
-		launcher.getBlenderMotor().set(0.0);
+		if (launcher.getBlenderMotor().get() > 0) launcher.getBlenderMotor().set(0.0);
 		
 		setTimeout(time);
 	}

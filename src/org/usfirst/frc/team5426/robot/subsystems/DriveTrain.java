@@ -40,7 +40,7 @@ public class DriveTrain extends Subsystem {
 		this.setDefaultCommand(new DriveCommand());
 	}
 
-	public void drive(double leftYAxis, double leftXAxis, boolean sensitive) {
+	public void drive(double leftYAxis, double leftXAxis) {
 		
 		drive.setSensitivity(RobotMap.DRIVE_SENSITIVITY);
 		

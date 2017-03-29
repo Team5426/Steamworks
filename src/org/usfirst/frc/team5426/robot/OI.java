@@ -7,6 +7,7 @@ import org.usfirst.frc.team5426.robot.commands.LauncherShootCommand;
 import org.usfirst.frc.team5426.robot.commands.MoveFuelCommand;
 import org.usfirst.frc.team5426.robot.commands.ResetCommand;
 import org.usfirst.frc.team5426.robot.commands.ShootGearCommand;
+import org.usfirst.frc.team5426.robot.commands.ToggleDoorsCommand;
 
 import utils.LogitechController;
 import utils.LogitechJoystick;
@@ -19,7 +20,7 @@ public class OI {
     public OI() {
     	
     	joystick.button_trigger.whileActive(new LauncherShootCommand(1.0));
-    	joystick.button_side.whileActive(new IntakeBallCommand(1.0));
+    	joystick.button_side.whenPressed(new ToggleDoorsCommand(0.5));
     	joystick.button_trigger.whenReleased(new ResetCommand(1.0));
     	
     	controller.button_A.whileActive(new IntakeBallCommand(1.0));

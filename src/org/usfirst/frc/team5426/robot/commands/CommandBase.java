@@ -9,6 +9,7 @@ import org.usfirst.frc.team5426.robot.subsystems.GearShooter;
 import org.usfirst.frc.team5426.robot.subsystems.Intake;
 import org.usfirst.frc.team5426.robot.subsystems.Launcher;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,6 +27,8 @@ public abstract class CommandBase extends Command {
     public static Launcher launcher;
     public static Climber climber;
     public static OI oi;
+    
+    //public static ADXRS450_Gyro gyro;
     
     public static SendableChooser<Front> front;
 
@@ -52,18 +55,14 @@ public abstract class CommandBase extends Command {
         climber = new Climber();
         compressor = new CompressorControl();
         oi = new OI();
+        
+        //gyro = new ADXRS450_Gyro();
     }
     
     //private static AnalogInput u = new AnalogInput(0);
 
     public static void updateSmartDashboard() {
     	
-    	SendableChooser<Front> front = new SendableChooser<>();
-    	front.addDefault("Intake", Front.INTAKE);
-    	front.addObject("Gear Shooter", Front.SHOOTER);
-    	
-    	SmartDashboard.putData("Front", front);
-    	
-    	RobotMap.init();
+    	SmartDashboard.putData("Door Status", GearShooter.shooter_solenoid);
     }
 }

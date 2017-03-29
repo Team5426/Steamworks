@@ -11,6 +11,11 @@ public class IntakeBallCommand extends CommandBase {
 	
 	protected void initialize() {
 		
+		/*while (CommandBase.gyro.getAngle() < 90 || CommandBase.gyro.getAngle() >= 93) {
+			
+			CommandBase.drive.getDrive().arcadeDrive(0.0, 0.5);
+		}*/
+		
 		intake.intake();
 	}
 	
@@ -21,6 +26,7 @@ public class IntakeBallCommand extends CommandBase {
 	protected void interrupted() {
 		
 		intake.stop();
+		
 		this.cancel();
 	}
 	

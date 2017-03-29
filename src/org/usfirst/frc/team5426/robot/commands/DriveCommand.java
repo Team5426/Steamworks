@@ -27,7 +27,7 @@ public class DriveCommand extends CommandBase {
     	
     	else {*/
     		
-    		drive.drive(-OI.controller.getLeftAxisY(), -OI.controller.getLeftAxisX(), true);
+    		drive.drive(-OI.controller.getLeftAxisY(), -OI.controller.getLeftAxisX());
     	//}
         
         // Sending the drive command as fast as possible is pointless and hogs CPU cycles.

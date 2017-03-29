@@ -25,6 +25,7 @@ public class RobotMap {
 							CLIMB_SPEED,
 							GEAR_SHOOT_SECONDS,
 							DRIVE_SENSITIVITY,
+							TURNING_GAIN,
 							INTAKE_SLOW_SPEED;
 	
 	public static boolean COMPRESS;
@@ -42,6 +43,7 @@ public class RobotMap {
 		CLIMB_SPEED			= Robot.settings.getDouble("Climb Speed", 1.0);
 		DRIVE_SENSITIVITY	= Robot.settings.getDouble("Drive Sensitivity", 0.5);
 		INTAKE_SLOW_SPEED	= Robot.settings.getDouble("Fuel Moving Speed", 0.3);
+		TURNING_GAIN		= Robot.settings.getDouble("Turning Gain", 1.0);
 		
 		COMPRESS = Robot.settings.getBoolean("Compress", false);
 		
