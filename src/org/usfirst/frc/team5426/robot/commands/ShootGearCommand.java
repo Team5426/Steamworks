@@ -15,15 +15,19 @@ public class ShootGearCommand extends CommandBase {
 	
 	protected void initialize() {
 		
-		//new ToggleDoorsCommand(DoorPosition.CLOSE, 1.0);
+		gearshooter.doors_solenoid.set(true);
+		
+		Timer.delay(0.15);
 		
 		gearshooter.shoot();
+		
+		Timer.delay(0.5);
+		
+		//gearshooter.doors_solenoid.set(false);
 		
 		Timer.delay(RobotMap.GEAR_SHOOT_SECONDS);
 		
 		gearshooter.stop();
-		
-		//new ToggleDoorsCommand(DoorPosition.OPEN, 1.0);
 	}
 	
 	protected void execute() {

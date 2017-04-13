@@ -8,24 +8,23 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class GearShooter extends Subsystem {
 	
-	public static Solenoid shooter_solenoid;
-	//public static Solenoid doors_solenoid;
+	public Solenoid shooter_solenoid;
+	public Solenoid doors_solenoid;
 	
 	public GearShooter() {
 		
-		shooter_solenoid = new Solenoid(0);
-		//doors_solenoid = new Solenoid(0);
+		shooter_solenoid = new Solenoid(1);
+		doors_solenoid = new Solenoid(0);
+		
+		shooter_solenoid.set(false);
+		doors_solenoid.set(false);
 	}
 	
 	public void shoot() {
 		
 		shooter_solenoid.set(true);
 		
-		//doors_solenoid.set(true);
-		
 		Timer.delay(0.2);
-		
-		//doors_solenoid.set(true);
 	}
 	
 	public void stop() {

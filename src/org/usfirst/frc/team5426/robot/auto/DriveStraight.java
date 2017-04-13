@@ -8,6 +8,6 @@ public class DriveStraight extends CommandGroup {
 	
 	public DriveStraight() {
 		
-		this.addSequential(new AutonomousDrive(0.7, 0.0, 3.2));
+		this.addSequential(new AutonomousDrive(0.75, 0.0, 3.2));
 	}
 }

@@ -3,7 +3,7 @@ package org.usfirst.frc.team5426.robot.commands;
 public class AutonomousDrive extends CommandBase {
 	
 private double moveValue, rotateValue, time;
-	
+
 	public AutonomousDrive(double mv, double rv, double s) {
 		
 		requires(drive);

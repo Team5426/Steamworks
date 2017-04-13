@@ -63,6 +63,5 @@ public abstract class CommandBase extends Command {
 
     public static void updateSmartDashboard() {
     	
-    	SmartDashboard.putData("Door Status", GearShooter.shooter_solenoid);
     }
 }

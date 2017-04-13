@@ -1,11 +1,10 @@
 package org.usfirst.frc.team5426.robot;
 
-import org.usfirst.frc.team5426.robot.auto.DriveBoilerGear;
+import org.usfirst.frc.team5426.robot.auto.SidePegBlue;
+import org.usfirst.frc.team5426.robot.auto.SidePegRed;
 import org.usfirst.frc.team5426.robot.auto.DriveStraight;
 import org.usfirst.frc.team5426.robot.auto.DropGear;
 import org.usfirst.frc.team5426.robot.commands.CommandBase;
-import org.usfirst.frc.team5426.robot.commands.ToggleDoorsCommand;
-import org.usfirst.frc.team5426.robot.subsystems.GearShooter;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -40,48 +39,26 @@ public class Robot extends IterativeRobot {
 	public static boolean canCompress = false;
 	
 	@Override
-    public void robotInit() {		
+    public void robotInit() {	
 		
 		settings = Preferences.getInstance();
 		
 		RobotMap.init();
         CommandBase.init();
-		
+        
         autoMode = new SendableChooser<CommandGroup>();
     	autoMode.addDefault("Autonomous Straight Gear", new DropGear());
     	autoMode.addObject("Autonomous Straight", new DriveStraight());
-    	autoMode.addObject("Autonomous Boiler Gear", new DriveBoilerGear());
+    	autoMode.addObject("Autonomous Side Gear Blue", new SidePegBlue());
+    	autoMode.addObject("Autonomous Side Gear Red", new SidePegRed());
     	SmartDashboard.putData("Autonomous Mode: ", autoMode);
     	
     	CameraServer server = CameraServer.getInstance();
     	
-    	// 10.0.100.5
-    	// frc-field.local
-    	// 10.54.26.11 or 10.54.26.12
+    	UsbCamera cam = new UsbCamera("cam0", 0);
+    	cam.setResolution(300, 300);
     	
-    	/*AxisCamera camera = server.addAxisCamera("10.54.26.11:8081");
-        camera.setResolution(300, 300);
-        
-        visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> {
-        	
-            if (!pipeline.filterContoursOutput().isEmpty()) {
-            	
-                Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
-                
-                synchronized (imgLock) {
-                	
-                    centerX = r.x + (r.width / 2);
-                }
-            }
-        });
-        
-        visionThread.setDaemon(true);
-        visionThread.start();*/
-    	
-    	//UsbCamera cam = new UsbCamera("cam0", 0);
-    	//cam.setResolution(300, 300);
-    	
-    	//server.startAutomaticCapture(cam);
+    	server.startAutomaticCapture(cam);
 	}
 
     @Override
@@ -101,60 +78,33 @@ public class Robot extends IterativeRobot {
     
     @Override
     public void teleopInit() {
-    	
-    	canCompress = false;
+    
+    	if (!(autonomousCommand == null)) {
+    		
+    		autonomousCommand.cancel();
+    	}
     }
     
     @Override
     public void robotPeriodic() {
     	
-    	//SmartDashboard.putData("Door Status", GearShooter.doors_solenoid);
-    	SmartDashboard.putData("Drive", CommandBase.drive);
-    	SmartDashboard.putData("Door Toggle", new ToggleDoorsCommand(1.0));
     }
 
     @Override
     public void disabledPeriodic() {
     	
-    	/*if (OI.controller.button_Y.get()) {
-    		
-    		CommandBase.compressor.compress();
-    	}
-    	
-    	else {
-    		
-    		CommandBase.compressor.stop();
-    	}*/
     }
 
     @Override
     public void teleopPeriodic() {
     	
     	Scheduler.getInstance().run();
-        CommandBase.updateSmartDashboard();
     }
     
     @Override
     public void autonomousPeriodic() {
     	
     	Scheduler.getInstance().run();
-    	
-    	/*System.out.println("autonomousPeriodic() fired");
-    	
-    	double centerX;
-    	
-    	synchronized (imgLock) {
-    		
-    		centerX = this.centerX;
-    	}
-    	
-    	double turn = (IMG_WIDTH / 2) - centerX;
-    	
-    	System.out.println("Turn: " + turn);
-    	
-    	RobotMap.drive.arcadeDrive(0.2, turn * 0.005);
-    	
-    	System.out.println("Center X: " + centerX);*/
     }
     
     @Override

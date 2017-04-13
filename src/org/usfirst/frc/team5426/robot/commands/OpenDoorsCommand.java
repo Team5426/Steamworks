@@ -1,8 +1,8 @@
 package org.usfirst.frc.team5426.robot.commands;
 
-public class ToggleDoorsCommand extends CommandBase {
+public class OpenDoorsCommand extends CommandBase {
 	
-	public ToggleDoorsCommand(double timeout) {
+	public OpenDoorsCommand(double timeout) {
 		
 		requires(gearshooter);
 		
@@ -12,14 +12,9 @@ public class ToggleDoorsCommand extends CommandBase {
 	@Override
 	protected void initialize() {
 		
-		if (gearshooter.doors_solenoid.get()) {
-			
-			new CloseDoorsCommand(0.5);
-		}
+		if (!gearshooter.doors_solenoid.get()) {
 		
-		else {
-			
-			new OpenDoorsCommand(0.5);
+			gearshooter.doors_solenoid.set(true);
 		}
 	}
 	

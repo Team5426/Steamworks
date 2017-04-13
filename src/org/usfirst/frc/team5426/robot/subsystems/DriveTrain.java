@@ -4,7 +4,9 @@ import org.usfirst.frc.team5426.robot.OI;
 import org.usfirst.frc.team5426.robot.RobotMap;
 import org.usfirst.frc.team5426.robot.commands.DriveCommand;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -20,7 +22,7 @@ public class DriveTrain extends Subsystem {
 
 	private RobotDrive drive;
 	
-	private double previousSensitivity;
+	public ADXRS450_Gyro gyro;
 
 	public DriveTrain() {
 
@@ -30,6 +32,10 @@ public class DriveTrain extends Subsystem {
 		REAR_RIGHT = new Talon(RobotMap.REAR_RIGHT_CHANNEL);
 
 		drive = new RobotDrive(FRONT_LEFT, REAR_LEFT, FRONT_RIGHT, REAR_RIGHT);
+		
+		gyro = new ADXRS450_Gyro(Port.kOnboardCS0);;
+		
+		gyro.calibrate();
 		
 		RobotMap.drive = this.drive;
 	}
