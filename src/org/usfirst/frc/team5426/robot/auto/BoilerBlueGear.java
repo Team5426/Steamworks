@@ -7,9 +7,9 @@ import org.usfirst.frc.team5426.robot.commands.ShootGearCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class SidePegRed extends CommandGroup {
+public class BoilerBlueGear extends CommandGroup {
 
-	public SidePegRed() {
+	public BoilerBlueGear() {
 		
 		this.setTimeout(15);
 		

@@ -38,6 +38,7 @@ public class DriveTrain extends Subsystem {
 		gyro.calibrate();
 		
 		RobotMap.drive = this.drive;
+		RobotMap.gyro = gyro;
 	}
 
 	@Override

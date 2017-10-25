@@ -2,6 +2,7 @@ package org.usfirst.frc.team5426.robot;
 
 import org.usfirst.frc.team5426.robot.commands.CommandBase;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import utils.Front;
@@ -33,6 +34,8 @@ public class RobotMap {
 	public static Front		FRONT;
 	
 	public static RobotDrive drive;
+	
+	public static ADXRS450_Gyro gyro;
 	
 	public static void init() {
 		

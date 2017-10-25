@@ -7,21 +7,21 @@ import org.usfirst.frc.team5426.robot.commands.ShootGearCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class SidePegBlue extends CommandGroup {
+public class BoilerRedGear extends CommandGroup {
 
-	public SidePegBlue() {
+	public BoilerRedGear() {
 		
 		// Closes the doors
 		this.addSequential(new CloseDoorsCommand(0.01));
 		
 		// Initial Forward Drive
-		this.addSequential(new AutonomousDrive(-0.8, 0.0, 1.3));
+		this.addSequential(new AutonomousDrive(-0.8, 0.0, 1.15));
 		
 		// Initial Motor Reset
 		this.addSequential(new AutonomousDrive(0.0, 0.0, 0.5));
 		
 		// First Turn (90 degrees)
-		this.addSequential(new AutonomousTurn(-92.0));
+		this.addSequential(new AutonomousTurn(-82.0));
 		
 		// Second Motor Reset
 		this.addSequential(new AutonomousDrive(0.0, 0.0, 0.5));
@@ -44,6 +44,6 @@ public class SidePegBlue extends CommandGroup {
 		this.addSequential(new AutonomousTurn(65.0));
 		
 		// Drives over the line
-		this.addSequential(new AutonomousDrive(-0.8, 0.0, 2));
+		this.addSequential(new AutonomousDrive(-0.8, 0.0, 1.5));
 	}
 }

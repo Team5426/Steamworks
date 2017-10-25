@@ -43,10 +43,6 @@ public abstract class CommandBase extends Command {
     }
 
     public static void init() {
-    	
-    	front = new SendableChooser<>();
-    	front.addDefault("Intake", Front.INTAKE);
-    	front.addObject("Gear Shooter", Front.SHOOTER);
 
     	intake = new Intake();
         drive = new DriveTrain();
@@ -54,6 +50,7 @@ public abstract class CommandBase extends Command {
         launcher = new Launcher();
         climber = new Climber();
         compressor = new CompressorControl();
+        
         oi = new OI();
         
         //gyro = new ADXRS450_Gyro();
